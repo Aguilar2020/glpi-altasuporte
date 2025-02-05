@@ -1,32 +1,35 @@
-version: "3.8"
+#version: "3.7"
 
 services:
 #MariaDB Container
   mariadb:
-    image: mariadb:10.7
+    image: rodrigoaguilar02/mysqlglpi:v3.0.0
     container_name: mariadb
     hostname: mariadb
     environment:
-      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_ROOT_PASSWORD=diouxx
       - MARIADB_DATABASE=glpidb
       - MARIADB_USER=glpi_user
       - MARIADB_PASSWORD=glpi
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
 
 #GLPI Container
   glpi:
-    image: diouxx/glpi
-    container_name : glpi
+    image: rodrigoaguilar02/glpi:v3.0.0
+    container_name : Glpi
     hostname: glpi
     environment:
-      - VERSION_GLPI=10.0.15
+      - VERSION_GLPI=10.0.17
       - TIMEZONE=America/So_Paulo
       #-TZ=America/Sao_Paulo
-    #ports:
-    #  - "1880:80"
-      
+    ports:
+      - "1880:80"
+      - "22022:22" 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.glpi.rule=Host(`sac.altaconsultoria.com.br`)"
+      - "traefik.http.routers.glpi.rule=Host(`desk.altaconsultoria.com.br`)"
       - "traefik.http.routers.glpi.entrypoints=websecure"
       - "traefik.http.routers.glpi.tls=true"
       - "traefik.http.routers.glpi.service=glpi"
