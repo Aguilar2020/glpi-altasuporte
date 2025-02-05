@@ -3,7 +3,7 @@
 services:
 #MariaDB Container
   mariadb:
-    image: rodrigoaguilar02/mysqlglpi:v3.0.0
+    image: rodrigoaguilar02/mysqlglpi:v1.0.3
     container_name: mariadb
     hostname: mariadb
     environment:
@@ -17,7 +17,7 @@ services:
 
 #GLPI Container
   glpi:
-    image: rodrigoaguilar02/glpi:v3.0.0
+    image: rodrigoaguilar02/glpi:v1.0.3
     container_name : Glpi
     hostname: glpi
     environment:
